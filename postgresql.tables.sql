@@ -66,3 +66,25 @@ CREATE TABLE "visits" (
 -- Insert couple of records to table visits
 INSERT INTO "visits"("id", "city", "last_update_date") VALUES(1, 'Freemont', '1983-05-22 01:01:01');
 INSERT INTO "visits"("id", "city", "last_update_date") VALUES(2, 'Jicin', '1987-02-02 02:02:02');
+
+-- Special table with booleans
+CREATE TABLE "table_with_booleans" (
+  "id" INTEGER NOT NULL,
+  "city" VARCHAR(50),
+  "visited" BOOLEAN,
+  PRIMARY KEY ("id")
+);
+
+-- Insert couple of records to table table_with_booleans
+INSERT INTO "table_with_booleans"("id", "city", "visited") VALUES(1, 'Prague', true);
+INSERT INTO "table_with_booleans"("id", "city", "visited") VALUES(2, 'Brno', false);
+INSERT INTO "table_with_booleans"("id", "city", "visited") VALUES(3, 'Jicin', true);
+
+-- Create custom schema "us"
+CREATE SCHEMA "us";
+
+-- Create variant of table cities in schema US
+CREATE TABLE "us"."cities" (LIKE "cities");
+
+-- Populate data in us.cities from cities
+INSERT INTO "us"."cities" SELECT * FROM "cities" WHERE "country" = 'USA';
